@@ -28,7 +28,7 @@ public class Mountain {
     private int cost;
     private Auxdata auxdata;
 
-
-
-
+    public String getName() {
+        return name;
+    }
 }
