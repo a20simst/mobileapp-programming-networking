@@ -1,7 +1,7 @@
 [{
   "ID": "mobilprog_k2",
   "name": "K2",
-  "type": "brom",
+  "type": "a20simst",
   "company": "",
   "location": "The Karakoram range",
   "category": "",
@@ -14,7 +14,7 @@
 }, {
   "ID": "mobilprog_kilimanjaro",
   "name": "Kilimanjaro",
-  "type": "brom",
+  "type": "a20simst",
   "company": "",
   "location": "Tanzania",
   "category": "",
@@ -27,7 +27,7 @@
 }, {
   "ID": "mobilprog_matterhorn",
   "name": "Matterhorn",
-  "type": "brom",
+  "type": "a20simst",
   "company": "",
   "location": "The Alps",
   "category": "",
@@ -40,7 +40,7 @@
 }, {
   "ID": "mobilprog_mount_everest",
   "name": "Mount Everest",
-  "type": "brom",
+  "type": "a20simst",
   "company": "",
   "location": "The Mahalangur Himal sub-range of the Himalayas",
   "category": "",
