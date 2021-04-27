@@ -18,5 +18,18 @@ public class Mountain {
     public String toString() {
         return name;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
 }
 

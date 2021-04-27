@@ -27,6 +27,7 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity {
     private Mountain[] mountains;
     private ListView listView;
+    private ArrayAdapter<Mountain> adapter;
 
     public static String convertStreamToString(InputStream is) throws Exception {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -43,29 +44,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        listView=(ListView) findViewById(R.id.list_item);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Mountain m = adapter.getItem(position);
+
+
+                m.getName();
+                m.getSize();
+                m.getLocation();
+                String msg =  m.getLocation() + m.getSize() + m.getName();
+
+                Toast.makeText(MainActivity.this, msg , Toast.LENGTH_LONG).show();
+            }
+        });
         new JsonTask().execute("https://wwwlab.iit.his.se/brom/kurser/mobilprog/dbservice/admin/getdataasjson.php?type=brom");
-
-       /* try{
-            InputStream is = getApplicationContext().getAssets().open("mountains.json");
-            String s = convertStreamToString(is);
-            Log.d("MainActivity","The following text was found in textfile:\n\n"+s);
-
-            Gson gson = new Gson();
-            mountains = gson.fromJson(s,Mountain[].class);
-
-
-            ArrayAdapter<Mountain> adapter = new ArrayAdapter<>(this,R.layout.list_item_textview,mountains);
-            ListView first_listview=(ListView) findViewById(R.id.list_item);
-            first_listview.setAdapter(adapter);
-            first_listview.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(getApplicationContext(), "Berg:", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }catch (Exception e){
-            Log.e("MainActivity","Something went wrong when reading textfile:\n\n"+ e.getMessage());
-        } */
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -113,18 +108,14 @@ public class MainActivity extends AppCompatActivity {
             Log.d("TAG", json);
             Gson gson = new Gson();
             mountains = gson.fromJson(json,Mountain[].class);
-            ArrayAdapter<Mountain> adapter = new ArrayAdapter<Mountain>(MainActivity.this,R.layout.list_item_textview,mountains);
-            ListView listView=(ListView) findViewById(R.id.list_item);
+             adapter = new ArrayAdapter<Mountain>(MainActivity.this,R.layout.list_item_textview,mountains);
+            listView=(ListView) findViewById(R.id.list_item);
             listView.setAdapter(adapter);
             for (int i = 0; i < mountains.length; ++i) {
                 Log.d("==>","Hittade ett berg:" +mountains[i]) ;
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Log.d("==>","Hittade ett berg:" +mountains) ;
-                    }
-                });
+
             }
         }
     }
+
 }
