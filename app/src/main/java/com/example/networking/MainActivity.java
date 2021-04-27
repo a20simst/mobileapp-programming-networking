@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -115,7 +116,15 @@ public class MainActivity extends AppCompatActivity {
             ArrayAdapter<Mountain> adapter = new ArrayAdapter<Mountain>(MainActivity.this,R.layout.list_item_textview,mountains);
             ListView listView=(ListView) findViewById(R.id.list_item);
             listView.setAdapter(adapter);
-
+            for (int i = 0; i < mountains.length; ++i) {
+                Log.d("==>","Hittade ett berg:" +mountains[i]) ;
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Log.d("==>","Hittade ett berg:" +mountains) ;
+                    }
+                });
+            }
         }
     }
 }
