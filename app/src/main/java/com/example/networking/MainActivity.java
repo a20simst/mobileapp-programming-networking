@@ -30,16 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Mountain> mountainsList = new ArrayList<>();
     private ArrayAdapter<Mountain> adapter;
 
-    public static String convertStreamToString(InputStream is) throws Exception {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        StringBuilder sb = new StringBuilder();
-        String line = null;
-        while ((line = reader.readLine()) != null) {
-            sb.append(line).append("\n");
-        }
-        reader.close();
-        return sb.toString();
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 m.getName();
                 m.getSize();
                 m.getLocation();
-                String msg =  m.getLocation() + m.getSize() + m.getName();
+                String msg = " Name: " + m.getName()  + " Location: " + m.getLocation() + " Size: " + m.getSize();
 
                 Toast.makeText(MainActivity.this, msg , Toast.LENGTH_LONG).show();
             }
@@ -115,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
             mountainsList.clear();
             for (int i = 0; i < mountains.length; ++i) {
-                Log.d("==>","Hittade ett berg:" +mountains[i]) ;
+
                 mountainsList.add(mountains[i]);
             }
             adapter.notifyDataSetChanged();
