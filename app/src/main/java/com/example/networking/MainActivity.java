@@ -25,8 +25,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
-    private Mountain[] mountains;
-    private ListView listView;
+
+
+    private ArrayList<Mountain> mountainsList = new ArrayList<>();
     private ArrayAdapter<Mountain> adapter;
 
     public static String convertStreamToString(InputStream is) throws Exception {
@@ -44,14 +45,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listView=(ListView) findViewById(R.id.list_item);
+        ListView listView;
+        listView = findViewById(R.id.list_item);
+        adapter = new ArrayAdapter<Mountain>(MainActivity.this,R.layout.list_item_textview,mountainsList);
+        listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Mountain m = adapter.getItem(position);
-
-
+                Mountain m = mountainsList.get(position);
                 m.getName();
                 m.getSize();
                 m.getLocation();
@@ -107,14 +109,16 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String json) {
             Log.d("TAG", json);
             Gson gson = new Gson();
+            Mountain[] mountains;
             mountains = gson.fromJson(json,Mountain[].class);
-             adapter = new ArrayAdapter<Mountain>(MainActivity.this,R.layout.list_item_textview,mountains);
-            listView=(ListView) findViewById(R.id.list_item);
-            listView.setAdapter(adapter);
+
+
+            mountainsList.clear();
             for (int i = 0; i < mountains.length; ++i) {
                 Log.d("==>","Hittade ett berg:" +mountains[i]) ;
-
+                mountainsList.add(mountains[i]);
             }
+            adapter.notifyDataSetChanged();
         }
     }
 
