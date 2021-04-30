@@ -4,10 +4,6 @@
     android:id="@+id/list_item_textview"
     android:textSize="30dp"
     android:gravity="center"
-    android:background="@color/colorAccent"
-
-    >
-
-
+    android:background="@color/colorAccent">
 
 </TextView>
